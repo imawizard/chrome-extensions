@@ -1,0 +1,697 @@
+{
+    "version": 0,
+    "date": "2022-02-03 01:49:39",
+    "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
+    "manifest": {
+        "author": "Alex Yatskov",
+        "background": {
+            "page": "background.html",
+            "persistent": true
+        },
+        "browser_action": {
+            "default_icon": {
+                "16": "images/icon16.png",
+                "19": "images/icon19.png",
+                "32": "images/icon32.png",
+                "38": "images/icon38.png",
+                "48": "images/icon48.png",
+                "64": "images/icon64.png",
+                "128": "images/icon128.png"
+            },
+            "default_popup": "action-popup.html",
+            "default_title": "Yomichan"
+        },
+        "commands": {
+            "openInfoPage": {
+                "description": "Open the info page"
+            },
+            "openPopupWindow": {
+                "description": "Open the popup window"
+            },
+            "openSearchPage": {
+                "description": "Open the search page",
+                "suggested_key": {
+                    "default": "Alt+Insert"
+                }
+            },
+            "openSettingsPage": {
+                "description": "Open the settings page"
+            },
+            "toggleTextScanning": {
+                "description": "Toggle text scanning on/off",
+                "suggested_key": {
+                    "default": "Alt+Delete"
+                }
+            }
+        },
+        "content_scripts": [
+            {
+                "all_frames": true,
+                "js": [
+                    "js/core.js",
+                    "js/yomichan.js",
+                    "js/app/frontend.js",
+                    "js/app/popup.js",
+                    "js/app/popup-factory.js",
+                    "js/app/popup-proxy.js",
+                    "js/app/popup-window.js",
+                    "js/comm/api.js",
+                    "js/comm/cross-frame-api.js",
+                    "js/comm/frame-ancestry-handler.js",
+                    "js/comm/frame-client.js",
+                    "js/comm/frame-offset-forwarder.js",
+                    "js/dom/dom-text-scanner.js",
+                    "js/dom/document-util.js",
+                    "js/dom/text-source-element.js",
+                    "js/dom/text-source-range.js",
+                    "js/input/hotkey-handler.js",
+                    "js/language/text-scanner.js",
+                    "js/script/dynamic-loader.js",
+                    "js/app/content-script-main.js"
+                ],
+                "match_about_blank": true,
+                "matches": [
+                    "http://*/*",
+                    "https://*/*",
+                    "file://*/*"
+                ],
+                "run_at": "document_idle"
+            },
+            {
+                "all_frames": true,
+                "js": [
+                    "js/document-start.js"
+                ],
+                "match_about_blank": true,
+                "matches": [
+                    "http://docs.google.com/*",
+                    "https://docs.google.com/*"
+                ],
+                "run_at": "document_start"
+            }
+        ],
+        "content_security_policy": "default-src 'self'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
+        "description": "Japanese dictionary with Anki integration",
+        "icons": {
+            "16": "images/icon16.png",
+            "19": "images/icon19.png",
+            "32": "images/icon32.png",
+            "38": "images/icon38.png",
+            "48": "images/icon48.png",
+            "64": "images/icon64.png",
+            "128": "images/icon128.png"
+        },
+        "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAug/0Wtc35jGyy+Jkf4Kt9DUAzvziCJbhwlwzdro0cPnN+2K6Y2rCBVgAJln7SffCKVWa0k6BM3D7m7yydAECgSo8VUn2zUgInXpfQAuI2dG+6OEi0SOu2SkXJFvvAMjM/JAXY0zQRofnxeDRqvT7EtHW9lLwtgLTBuJObuq5zCHAPFa3PZ5ZORvUEmQZ2HDxUxaUZzsFW4kZ/rxPaNXTWe+qM30wqvlk79DBUJVq9zlzsDGM6G5qWcCk3vT5MEGuZVK7IPi6w9dPfOA3myicuywhDxumteg6wFraarMMAR2Stc80Yb9pCZT5Jav9e7eG97DuBAh97IOKrfI6mU8CkwIDAQAB",
+        "manifest_version": 2,
+        "minimum_chrome_version": "57.0.0.0",
+        "name": "Yomichan",
+        "optional_permissions": [
+            "clipboardRead",
+            "nativeMessaging"
+        ],
+        "options_ui": {
+            "open_in_tab": true,
+            "page": "settings.html"
+        },
+        "permissions": [
+            "<all_urls>",
+            "storage",
+            "clipboardWrite",
+            "unlimitedStorage",
+            "webRequest",
+            "webRequestBlocking"
+        ],
+        "sandbox": {
+            "content_security_policy": "sandbox allow-scripts; default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'unsafe-inline'",
+            "pages": [
+                "template-renderer.html"
+            ]
+        },
+        "update_url": "https://clients2.google.com/service/update2/crx",
+        "version": "21.10.31.1",
+        "web_accessible_resources": [
+            "popup.html",
+            "template-renderer.html"
+        ]
+    },
+    "environment": {
+        "browser": "chrome",
+        "platform": {
+            "os": "mac"
+        }
+    },
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 OPR/83.0.4254.27",
+    "permissions": {
+        "origins": [
+            "<all_urls>",
+            "chrome://favicon/*",
+            "file:///*",
+            "http://*/*",
+            "http://docs.google.com/*",
+            "https://*/*",
+            "https://docs.google.com/*"
+        ],
+        "permissions": [
+            "clipboardWrite",
+            "nativeMessaging",
+            "storage",
+            "unlimitedStorage",
+            "webRequest",
+            "webRequestBlocking"
+        ]
+    },
+    "options": {
+        "profiles": [
+            {
+                "name": "Default",
+                "options": {
+                    "general": {
+                        "enable": true,
+                        "resultOutputMode": "group",
+                        "debugInfo": false,
+                        "maxResults": 32,
+                        "showAdvanced": false,
+                        "popupDisplayMode": "default",
+                        "popupWidth": 400,
+                        "popupHeight": 250,
+                        "popupHorizontalOffset": 0,
+                        "popupVerticalOffset": 10,
+                        "popupHorizontalOffset2": 10,
+                        "popupVerticalOffset2": 0,
+                        "popupHorizontalTextPosition": "below",
+                        "popupVerticalTextPosition": "before",
+                        "showGuide": false,
+                        "compactTags": false,
+                        "mainDictionary": "JMdict (English)",
+                        "customPopupCss": "",
+                        "popupScalingFactor": 1,
+                        "popupScaleRelativeToPageZoom": false,
+                        "popupScaleRelativeToVisualViewport": true,
+                        "popupTheme": "default",
+                        "popupOuterTheme": "default",
+                        "customPopupOuterCss": "",
+                        "enableWanakana": true,
+                        "showPitchAccentDownstepNotation": true,
+                        "showPitchAccentPositionNotation": true,
+                        "showPitchAccentGraph": false,
+                        "showIframePopupsInRootFrame": false,
+                        "useSecurePopupFrameUrl": true,
+                        "usePopupShadowDom": true,
+                        "usePopupWindow": false,
+                        "glossaryLayoutMode": "default",
+                        "popupCurrentIndicatorMode": "triangle",
+                        "popupActionBarVisibility": "auto",
+                        "popupActionBarLocation": "top",
+                        "frequencyDisplayMode": "split-tags-grouped",
+                        "termDisplayMode": "ruby",
+                        "sortFrequencyDictionary": null,
+                        "sortFrequencyDictionaryOrder": "descending"
+                    },
+                    "scanning": {
+                        "touchInputEnabled": true,
+                        "selectText": true,
+                        "alphanumeric": true,
+                        "autoHideResults": false,
+                        "delay": 20,
+                        "length": 10,
+                        "deepDomScan": false,
+                        "popupNestingMaxDepth": 1,
+                        "enablePopupSearch": false,
+                        "enableOnPopupExpressions": false,
+                        "enableOnSearchPage": true,
+                        "enableSearchTags": false,
+                        "layoutAwareScan": false,
+                        "hideDelay": 0,
+                        "pointerEventsEnabled": false,
+                        "preventMiddleMouse": {
+                            "onWebPages": false,
+                            "onPopupPages": false,
+                            "onSearchPages": false,
+                            "onSearchQuery": false
+                        },
+                        "inputs": [
+                            {
+                                "include": "alt",
+                                "exclude": "mouse0",
+                                "types": {
+                                    "mouse": true,
+                                    "touch": false,
+                                    "pen": false
+                                },
+                                "options": {
+                                    "showAdvanced": false,
+                                    "searchTerms": true,
+                                    "searchKanji": true,
+                                    "scanOnTouchMove": true,
+                                    "scanOnPenHover": true,
+                                    "scanOnPenPress": true,
+                                    "scanOnPenRelease": false,
+                                    "preventTouchScrolling": true
+                                }
+                            },
+                            {
+                                "include": "mouse2",
+                                "exclude": "",
+                                "types": {
+                                    "mouse": true,
+                                    "touch": false,
+                                    "pen": false
+                                },
+                                "options": {
+                                    "showAdvanced": false,
+                                    "searchTerms": true,
+                                    "searchKanji": true,
+                                    "scanOnTouchMove": true,
+                                    "scanOnPenHover": true,
+                                    "scanOnPenPress": true,
+                                    "scanOnPenRelease": false,
+                                    "preventTouchScrolling": true
+                                }
+                            },
+                            {
+                                "include": "",
+                                "exclude": "",
+                                "types": {
+                                    "mouse": false,
+                                    "touch": true,
+                                    "pen": true
+                                },
+                                "options": {
+                                    "showAdvanced": false,
+                                    "searchTerms": true,
+                                    "searchKanji": true,
+                                    "scanOnTouchMove": true,
+                                    "scanOnPenHover": true,
+                                    "scanOnPenPress": true,
+                                    "scanOnPenRelease": false,
+                                    "preventTouchScrolling": true
+                                }
+                            }
+                        ]
+                    },
+                    "dictionaries": [
+                        {
+                            "name": "JMdict (English)",
+                            "priority": 0,
+                            "enabled": true,
+                            "allowSecondarySearches": false,
+                            "definitionsCollapsible": "not-collapsible"
+                        },
+                        {
+                            "name": "KANJIDIC (English)",
+                            "priority": 0,
+                            "enabled": true,
+                            "allowSecondarySearches": false,
+                            "definitionsCollapsible": "not-collapsible"
+                        }
+                    ],
+                    "anki": {
+                        "enable": false,
+                        "server": "http://127.0.0.1:8765",
+                        "tags": [
+                            "yomichan"
+                        ],
+                        "screenshot": {
+                            "format": "png",
+                            "quality": 92
+                        },
+                        "terms": {
+                            "deck": "",
+                            "model": "",
+                            "fields": {}
+                        },
+                        "kanji": {
+                            "deck": "",
+                            "model": "",
+                            "fields": {}
+                        },
+                        "fieldTemplates": null,
+                        "duplicateScope": "collection",
+                        "checkForDuplicates": true,
+                        "suspendNewCards": false,
+                        "displayTags": "never",
+                        "duplicateScopeCheckAllModels": false
+                    },
+                    "audio": {
+                        "enabled": true,
+                        "sources": [
+                            {
+                                "type": "jisho",
+                                "url": "",
+                                "voice": ""
+                            },
+                            {
+                                "type": "jpod101",
+                                "url": "",
+                                "voice": ""
+                            }
+                        ],
+                        "volume": 100,
+                        "autoPlay": false
+                    },
+                    "translation": {
+                        "convertHalfWidthCharacters": "false",
+                        "convertNumericCharacters": "false",
+                        "convertAlphabeticCharacters": "false",
+                        "convertHiraganaToKatakana": "false",
+                        "convertKatakanaToHiragana": "variant",
+                        "collapseEmphaticSequences": "false",
+                        "textReplacements": {
+                            "searchOriginal": true,
+                            "groups": []
+                        }
+                    },
+                    "parsing": {
+                        "enableScanningParser": true,
+                        "enableMecabParser": false,
+                        "selectedParser": "scan",
+                        "termSpacing": true,
+                        "readingMode": "hiragana"
+                    },
+                    "sentenceParsing": {
+                        "scanExtent": 200,
+                        "terminationCharacters": [
+                            {
+                                "enabled": true,
+                                "character1": "「",
+                                "character2": "」",
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": false
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "『",
+                                "character2": "』",
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": false
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "\"",
+                                "character2": "\"",
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": false
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "'",
+                                "character2": "'",
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": false
+                            },
+                            {
+                                "enabled": true,
+                                "character1": ".",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "!",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "?",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "．",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "。",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "！",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "？",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "…",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            }
+                        ],
+                        "terminationCharacterMode": "custom"
+                    },
+                    "inputs": {
+                        "hotkeys": [
+                            {
+                                "action": "close",
+                                "key": "Escape",
+                                "modifiers": [],
+                                "scopes": [
+                                    "popup"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "focusSearchBox",
+                                "key": "Escape",
+                                "modifiers": [],
+                                "scopes": [
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "previousEntry",
+                                "key": "PageUp",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": "3"
+                            },
+                            {
+                                "action": "nextEntry",
+                                "key": "PageDown",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": "3"
+                            },
+                            {
+                                "action": "lastEntry",
+                                "key": "End",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "firstEntry",
+                                "key": "Home",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "previousEntry",
+                                "key": "ArrowUp",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": "1"
+                            },
+                            {
+                                "action": "nextEntry",
+                                "key": "ArrowDown",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": "1"
+                            },
+                            {
+                                "action": "historyBackward",
+                                "key": "KeyB",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "historyForward",
+                                "key": "KeyF",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "addNoteKanji",
+                                "key": "KeyK",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "addNoteTermKanji",
+                                "key": "KeyE",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "addNoteTermKana",
+                                "key": "KeyR",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "playAudio",
+                                "key": "KeyP",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "viewNote",
+                                "key": "KeyV",
+                                "modifiers": [
+                                    "alt"
+                                ],
+                                "scopes": [
+                                    "popup",
+                                    "search"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            },
+                            {
+                                "action": "copyHostSelection",
+                                "key": "KeyC",
+                                "modifiers": [
+                                    "ctrl"
+                                ],
+                                "scopes": [
+                                    "popup"
+                                ],
+                                "enabled": true,
+                                "argument": ""
+                            }
+                        ]
+                    },
+                    "popupWindow": {
+                        "width": 400,
+                        "height": 250,
+                        "left": 0,
+                        "top": 0,
+                        "useLeft": false,
+                        "useTop": false,
+                        "windowType": "popup",
+                        "windowState": "normal"
+                    },
+                    "clipboard": {
+                        "enableBackgroundMonitor": false,
+                        "enableSearchPageMonitor": false,
+                        "autoSearchContent": true,
+                        "maximumSearchLength": 1000
+                    },
+                    "accessibility": {
+                        "forceGoogleDocsHtmlRendering": false
+                    }
+                },
+                "conditionGroups": []
+            }
+        ],
+        "profileCurrent": 0,
+        "version": 15,
+        "global": {
+            "database": {
+                "prefixWildcardsSupported": false
+            }
+        }
+    }
+}
